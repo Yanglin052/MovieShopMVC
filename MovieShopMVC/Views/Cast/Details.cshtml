@@ -10,27 +10,26 @@
             <br /><br />
             <h1 style="color:white">@Model.Name</h1>
         </div>  
-    </div>
+    </div><br />
 
     <div class="row">
         <div class="col" >
             <h5>Movies</h5>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group">
                 @foreach (var movie in @Model.Movies)
                 {
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <img src="@movie.PosterUrl" class="img-fluid float-end" alt="@movie.Title" />
+                            <div class="col-4">
+                                <img src="@movie.PosterUrl" class="img-fluid float-left" alt="@movie.Title" />
                             </div>
-
-                            <div class="col">
+                            <div class="col-8">
                                 <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">
                                     @movie.Title
                                 </a>
-                            </div>  
+                            </div>
                         </div>
-                    </div>
+                    </div><hr />
                 }
             </ul>
 

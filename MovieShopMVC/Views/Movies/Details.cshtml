@@ -18,12 +18,7 @@
                 }
             </div>
             <div>
-                @foreach (var rating in @Model.Reviews)
-                {
-                    var @rating.Rating
-                    <span class="badge"style="background-color:forestgreen">@rating.Rating</span>
-                }
-                
+                 <span class="badge"style="background-color:forestgreen">@Model.Rating.</span>
             </div>
 
             <br />
@@ -125,13 +120,15 @@
                                 <img src="@cast.ProfilePath" class="img-circle" alt="@cast.Name" height="80" width="50"/>
                             </div>
                             <div class="col">
-                                @cast.Name
+                                <a asp-controller="Cast" asp-action="Details" asp-route-id="@cast.Id">
+                                    @cast.Name
+                                </a>
                             </div>
                             <div class="col">
                                 @cast.Character
                             </div>   
                         </div>
-                    </div>
+                    </div><hr />
                 }
             </ul>
         </div>

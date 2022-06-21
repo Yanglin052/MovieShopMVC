@@ -12,11 +12,14 @@ namespace MovieShopMVC.Controllers
 
         private readonly IMovieService _movieService;
 
+        private readonly ICastService _castService;
 
-        public HomeController(ILogger<HomeController> logger, IMovieService movieService)
+
+        public HomeController(ILogger<HomeController> logger, IMovieService movieService, ICastService castService)
         {
             _logger = logger;
             _movieService = movieService;
+            _castService = castService;
         }
 
         [HttpGet]

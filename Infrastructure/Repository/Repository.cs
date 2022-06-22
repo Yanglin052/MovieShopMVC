@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repository;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,27 +17,27 @@ namespace Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public T Add(T entity)
+        public Task<T> Add(T entity)
         {
             throw new NotImplementedException();
         }
 
-        public T Delete(T entity)
+        public Task<T> Delete(T entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            return await _dbContext.Set<T>().ToListAsync();
+        }
+
+        public virtual Task<T> GeyById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual T GeyById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Updated(T entity)
+        public Task<T> Updated(T entity)
         {
             throw new NotImplementedException();
         }

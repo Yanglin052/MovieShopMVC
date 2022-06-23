@@ -3,11 +3,12 @@
 
 <div class="container-fluid">
     <div class="row" style="background-color:darkslateblue">
-        <div class="col-4" >
+        <div class="col-5" >
             <img src="@Model.PosterUrl" class="img-fluid float-end" alt="@Model.Title" />
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
+            <br />
             <h1 style="color:white">@Model.Title</h1>
             <p style="color:gainsboro">@Model.Tagline</p>
             <p style="color:gainsboro"><b>@Model.RunTime m| @Model.ReleaseDate.Value.Year</b></p>
@@ -16,9 +17,9 @@
                 {
                     <span class="badge rounded-pill" style="background-color:dimgray">@genre.Name</span>
                 }
-            </div>
+            </div><br />
             <div>
-                 <span class="badge"style="background-color:forestgreen">@Model.Rating.</span>
+                 <h4> <span class="badge"style="background-color:forestgreen">7.9</span></h4>
             </div>
 
             <br />
@@ -27,7 +28,7 @@
 
         <div class="col-2">
             <br /><br />
-            <button type="button" class="btn btn-dark btn-block" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>
+            <button type="button" class="btn btn-outline-light" style="width:180px" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>
             <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -52,7 +53,7 @@
                                     <li class="dropdown-item">9</li>
                                     <li class="dropdown-item">10</li>
                                 </ul>
-                            </div>
+                            </div><br />
                             <form>
                                 <div class="form-group">
                                     <label for="comment">Write Review:</label>
@@ -69,7 +70,7 @@
                 </div>
             </div><br /><br />
             
-            <button type="button" class="btn btn-light btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buy $@Model.Price</button>
+            <button type="button" class="btn btn-outline-light" style="width:180px" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buy $@Model.Price</button>
             <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -92,15 +93,15 @@
 
     <div class="row">
         <div class="col-4">
-            <h5>MOVIE FACTS</h5>
+            <h5>MOVIE FACTS</h5><hr />
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Release Date  <span class="badge rounded-pill" style="background-color:black">@Model.ReleaseDate.Value.Date</span></li>
-                <li class="list-group-item">Run Time  <span class="badge rounded-pill" style="background-color:black">@Model.RunTime m</span></li>
-                <li class="list-group-item">Box Office  <span class="badge rounded-pill" style="background-color:black">$@Model.Revenue</span></li>
-                <li class="list-group-item">Budget  <span class="badge rounded-pill" style="background-color:black">$@Model.Budget</span></li>
-            </ul>
-            <br />
-            <h5>TRAILERS</h5>
+                <li class="list-group-item">Release Date    <span class="badge rounded-pill" style="background-color:black">@Model.ReleaseDate.Value.Date</span></li>
+                <li class="list-group-item">Run Time    <span class="badge rounded-pill" style="background-color:black">@Model.RunTime m</span></li>
+                <li class="list-group-item">Box Office    <span class="badge rounded-pill" style="background-color:black">$@Model.Revenue</span></li>
+                <li class="list-group-item">Budget    <span class="badge rounded-pill" style="background-color:black">$@Model.Budget</span></li>
+            </ul><br /><br />
+
+            <h5>TRAILERS</h5><hr />
             <ul class="list-group list-group-flush">
                 @foreach (var trailer in @Model.Trailers)
                 {
@@ -108,25 +109,31 @@
                 }
             </ul>
         </div>
+        <div class="col-1">
 
-        <div class="col-8">
-            <h5>CAST</h5>
+        </div>
+
+        <div class="col-7">
+            <h5>CAST</h5><hr />
             <ul class="list-group list-group-flush">
                 @foreach (var cast in @Model.Casts)
                 {
                     <div class="container">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-2">
                                 <img src="@cast.ProfilePath" class="img-circle" alt="@cast.Name" height="80" width="50"/>
                             </div>
-                            <div class="col">
+                            <div class="col-4">
                                 <a asp-controller="Cast" asp-action="Details" asp-route-id="@cast.Id">
                                     @cast.Name
                                 </a>
                             </div>
-                            <div class="col">
+                            <div class="col-4">
                                 @cast.Character
-                            </div>   
+                            </div>
+                            <div class="col-2">
+
+                            </div>
                         </div>
                     </div><hr />
                 }

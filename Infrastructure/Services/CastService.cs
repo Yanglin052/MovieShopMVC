@@ -32,7 +32,12 @@ namespace Infrastructure.Services
 
             foreach (var movie in castDetails.MoviesOfCast)
             {
-                cast.Movies.Add(new MovieCardModel { Id = movie.CastId, Title = movie.Movie.Title, PosterUrl = movie.Movie.PosterUrl});
+                cast.Movies.Add(new MovieDetailsModel { Id = movie.CastId, Title = movie.Movie.Title, PosterUrl = movie.Movie.PosterUrl});
+            }
+
+            foreach (var movie in castDetails.MoviesOfCast)
+            {
+                cast.Casts.Add(new CastModel { Id = movie.CastId, Name = movie.Cast.Name, Character = cast.Character});
             }
 
             return cast;

@@ -8,30 +8,39 @@
 
         <div class="col-7">
             <br /><br />
-            <h1 style="color:white">@Model.Name</h1>
+            <h1 style="color:white">@Model.Name</h1><br /><br />
+            <a href="@Model.TmdbUrl"><button type="button" class="btn btn-outline-light">Know more about this cast...</button></a>
         </div>  
-    </div><br />
+    </div><br /><br />
 
     <div class="row">
-        <div class="col" >
-            <h5>  Movies</h5>
+        <div class="col-1">
+
+        </div>
+        <div class="col-8" >
+            <h5>Movies</h5><hr />
             <ul class="list-group">
                 @foreach (var movie in @Model.Movies)
                 {
                     <div class="container">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-2">
                                 <img src="@movie.PosterUrl" class="img-fluid float-left" alt="@movie.Title" />
                             </div>
-                            <div class="col-8">
+                            <div class="col-5" style="text-align:center">
                                 <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id">
                                     @movie.Title
                                 </a>
+                            </div>
+                            <div class="col-5">
+
                             </div>
                         </div>
                     </div><hr />
                 }
             </ul>
+        </div>
+        <div class="col-3">
 
         </div>
     </div>

@@ -8,6 +8,9 @@ namespace ApplicationCore.Exceptions
 {
     public class ConflictException:Exception
     {
+        public ConflictException(string massage): base(massage)
+        {
 
+        }
     }
 }

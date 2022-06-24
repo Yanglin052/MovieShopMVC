@@ -4,6 +4,7 @@ using ApplicationCore.Entities;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -18,13 +19,24 @@ builder.Services.AddScoped<ICastService, CastService>();
 builder.Services.AddScoped<ICastRepository, CastRepository>();
 builder.Services.AddScoped<IRepository<Genre>, Repository<Genre>>();
 builder.Services.AddScoped<IGenreService, GenreService>();
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddDbContext<MovieShopDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDbConnection"));
 });
 
+// set cookie based authentication information
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(
+         options =>
+         {
+             options.Cookie.Name = "MovieShopAuthCookie";
+             options.ExpireTimeSpan = TimeSpan.FromHours(2);
+             options.LoginPath = "/account/login";
+         }                                                                                                                                                           
+      );
 
 var app = builder.Build();
 
@@ -41,6 +53,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Authentication middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

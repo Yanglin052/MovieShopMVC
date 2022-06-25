@@ -1,0 +1,36 @@
+﻿@using MovieShopMVC.Services
+
+
+ @inject ICurrentLogedInUser currentUser
+
+ @if (currentUser.IsAuthenticated)
+ {
+     // if user is Authenticated, Hide login and Register button, show User Full Name, Email, links for Logout and View Profile Pages
+
+        <div class="text-end" >
+            <ul class="nav">
+                <li class="nav-item dropdown text-capitalize"> 
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropDownProfile" data-bs-toggle="dropdown">  
+                        @currentUser.FullName
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-controller="User" asp-action="Purchases"> Purchases </a>
+                        <a class="dropdown-item" asp-controller="User" asp-action="Favorites"> Favorites </a>
+                        <a class="dropdown-item" asp-controller="User" asp-action="Profile"> View Profile/Account </a>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout"> Logout </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+ }
+else
+{
+    // if User is not Authenticated, Show Login and Register buttons, use this partial view inside the layout Page
+     
+     <div class="text-end">
+        <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Login" > Login </a>
+        <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Register" > Register </a>
+     </div>
+}

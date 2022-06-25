@@ -64,5 +64,12 @@ namespace MovieShopMVC.Controllers
             var user = await _accountService.RegisterUser(model);
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+        }
     }
 }

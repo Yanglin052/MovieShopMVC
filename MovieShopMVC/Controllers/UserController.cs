@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieShopMVC.Services;
 
 namespace MovieShopMVC.Controllers
 {
@@ -8,12 +9,19 @@ namespace MovieShopMVC.Controllers
     {
         // all these actionmethods should only be executed when user is logged in
 
+        private readonly ICurrentLogedInUser _currentLogedInUser;
+        public UserController(ICurrentLogedInUser currentLogedInUser)
+        {
+            _currentLogedInUser = currentLogedInUser;
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Purchases()
         {
             // go to database and get all movies purchased by user, user id
             // var cookie = this.HttpContext.Request.Cookies["MovieShopAuthCookie"];
-
+            var userId = _currentLogedInUser.UserId;
             return View();
         }
 
@@ -38,6 +46,12 @@ namespace MovieShopMVC.Controllers
 
         [HttpPost]
         public async Task<IActionResult> BuyMovie()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
         {
             return View();
         }

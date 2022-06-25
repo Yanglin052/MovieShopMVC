@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +27,23 @@ namespace Infrastructure.Repository
         public Task<IEnumerable<Movie>> Get30HighestRatedMovies()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<PagedResultSetModel<Movie>> GetMoviesByGenre(int genreId, int pageSize = 30, int pageNumber = 1)
+        {
+            // get total count movies for the genre
+            var totalMoviesForGenre = await _dbContext.MovieGenres.Where(g => g.GenreId == genreId).CountAsync();
+
+            var movies = await _dbContext.MovieGenres
+                .Where(g => g.GenreId == genreId)
+                .Include(g => g.Movie)
+                .OrderByDescending(m => m.Movie.Revenue)
+                .Select(m => new Movie { Id = m.MovieId, PosterUrl = m.Movie.PosterUrl, Title = m.Movie.Title })
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+
+            var pagedMovies = new PagedResultSetModel<Movie>(pageNumber, totalMoviesForGenre, pageSize, movies);
+            return pagedMovies;
         }
 
         public async override Task<Movie> GeyById(int id)

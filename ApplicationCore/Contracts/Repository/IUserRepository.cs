@@ -10,6 +10,10 @@ namespace ApplicationCore.Contracts.Repository
     public interface IUserRepository: IRepository<User>
     {
         Task<User> GetUserByEmail(string email);
-        Task<bool> CheckIfMoviePurchasedByUser(int userId, int movieId);
+        Task<Favorite> GetFavoriteById(int userId, int movieId);
+        Task<Review> GetReviewById(int userId, int movieId);
+        Task<IEnumerable<Purchase>> GetPurchaseById(int id);
+        Task<bool> CheckIfMoviePurchasedByUser(int movieId, int userId);
+        Task<IEnumerable<Favorite>> GetAllFavoriteMoviesByUserId(int userId);
     }
 }

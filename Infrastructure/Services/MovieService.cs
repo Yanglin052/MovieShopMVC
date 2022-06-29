@@ -20,7 +20,11 @@ namespace Infrastructure.Services
 
         public async Task<MovieDetailsModel> GetMovieDetails(int id)
         {
-            var movieDetails = await _movieRepository.GeyById(id);
+            var movieDetails = await _movieRepository.GetById(id);
+            if (movieDetails == null)
+            {
+                return null;
+            }
 
             var movie = new MovieDetailsModel 
             {
@@ -87,5 +91,7 @@ namespace Infrastructure.Services
 
             return movieCards;
         }
+
+
     }
 }

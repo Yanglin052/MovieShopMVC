@@ -24,9 +24,14 @@ namespace Infrastructure.Repository
             return movies;
         }
 
-        public Task<IEnumerable<Movie>> Get30HighestRatedMovies()
+        public async Task<IEnumerable<Review>> Get30HighestRatedMovies()
         {
-            throw new NotImplementedException();
+            var movies = await _dbContext.Reviews
+                .OrderByDescending(m => m.Rating)
+                .Take(30)
+                .ToListAsync();     
+
+            return movies;
         }
 
         public async Task<PagedResultSetModel<Movie>> GetMoviesByGenre(int genreId, int pageSize = 30, int pageNumber = 1)
@@ -46,7 +51,7 @@ namespace Infrastructure.Repository
             return pagedMovies;
         }
 
-        public async override Task<Movie> GeyById(int id)
+        public async override Task<Movie> GetById(int id)
         {
             var movieDetails = await _dbContext.Movies
                 .Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre)

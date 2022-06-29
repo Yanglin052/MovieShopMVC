@@ -11,7 +11,7 @@ namespace ApplicationCore.Contracts.Repository
     public interface IMovieRepository: IRepository<Movie>
     {
         Task<IEnumerable<Movie>> Get30HighestGrossingMovies();
-        Task<IEnumerable<Movie>> Get30HighestRatedMovies();
+        Task<IEnumerable<Review>> Get30HighestRatedMovies();
         Task<PagedResultSetModel<Movie>> GetMoviesByGenre(int genreId, int pageSize = 30, int pageNumber = 1);
     }
 }

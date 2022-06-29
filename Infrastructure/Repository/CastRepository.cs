@@ -17,7 +17,7 @@ namespace Infrastructure.Repository
 
         }
 
-        public async override Task<Cast> GeyById(int id)
+        public async override Task<Cast> GetById(int id)
         {
             var castDetails = await _dbContext.Casts
                 .Include(m => m.MoviesOfCast).ThenInclude(m => m.Movie)

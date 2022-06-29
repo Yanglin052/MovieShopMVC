@@ -19,7 +19,7 @@ namespace Infrastructure.Services
         }
         public async Task<CastDetailsModel> GetCastDetails(int id)
         {
-            var castDetails = await _castRepository.GeyById(id);
+            var castDetails = await _castRepository.GetById(id);
 
             var cast = new CastDetailsModel
             {

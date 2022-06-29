@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Models;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,5 @@ namespace ApplicationCore.Contracts.Services
     {
         Task<bool> RegisterUser(UserRegisterModel model);
         Task<UserModel> ValidateUser(string email, string password);
-
     }
 }

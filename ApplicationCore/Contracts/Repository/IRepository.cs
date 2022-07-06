@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationCore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,5 @@ namespace ApplicationCore.Contracts.Repository
         Task<T> Add(T entity);
         Task<T> Updated(T entity);
         Task<T> Delete(T entity);
-
     }
 }

@@ -15,6 +15,14 @@ namespace Infrastructure.Repository
         public UserRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
         }
+        public async override Task<User> GetById(int id)
+        {
+            var userDetails = await _dbContext.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            return userDetails;
+        }
+
 
         public async Task<bool> CheckIfMoviePurchasedByUser(int movieId, int userId)
         {

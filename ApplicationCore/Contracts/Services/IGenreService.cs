@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Models;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace ApplicationCore.Contracts.Services
     public interface IGenreService
     {
         Task<IEnumerable<GenreModel>> GetAllGenres();
+        Task<bool> AddGenre(GenreModel genre);
+        Task<bool> DeleteGenre(int id);
     }
 }

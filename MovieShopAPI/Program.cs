@@ -60,6 +60,11 @@ if (app.Environment.IsDevelopment())
 app.UseMovieShopExceptionMiddleware();
 app.UseHttpsRedirection();
 
+app.UseCors(policy =>
+{
+    policy.WithOrigins(builder.Configuration["AngularURL"]).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -18,14 +18,13 @@ namespace MovieShopAPI.Controllers
             _movieRepository = movieRepository;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetMovies(int id)
+        {
+            var movie = await _movieService.GetMovies(id);
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetMovies()
-        //{
-        //    var movie = await _movieService.
-
-        //    return Ok(movie);
-        //}
+            return Ok(movie);
+        }
 
 
         [HttpGet]
@@ -71,20 +70,20 @@ namespace MovieShopAPI.Controllers
 
         [HttpGet]
         [Route("genre/{genreId:int}")]
-        public async Task<IActionResult> GetMoviesByGenre(int genreId, int pageSize = 30, int pageNumber = 1)
+        public async Task<IActionResult> GetMoviesByGenre(int genreId)
         {
-            var movie = await _movieService.GetMoviesByGenre(genreId, pageSize, pageNumber);
+            var movie = await _movieService.GetMoviesByGenre(genreId);
 
             return Ok(movie);
         }
 
-        //[HttpGet]
-        //[Route("{id:int}/reviews")]
-        //public async Task<IActionResult> GetMovieReviews()
-        //{
-        //    var movie = await _movieService.
+        [HttpGet]
+        [Route("{id:int}/reviews")]
+        public async Task<IActionResult> GetMovieReviews(int movieId)
+        {
+            var review = await _movieRepository.GetReviewsByMovie(movieId);
 
-        //    return Ok(movie);
-        //}
+            return Ok(review);
+        }
     }
 }

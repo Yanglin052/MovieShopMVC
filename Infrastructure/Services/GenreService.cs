@@ -24,5 +24,32 @@ namespace Infrastructure.Services
             var genresModel = genres.Select(g => new GenreModel { Id = g.Id, Name = g.Name });
             return genresModel;
         }
+
+        public async Task<bool> AddGenre(GenreModel genre)
+        {
+            var newGenre = new Genre
+            {
+                Id = genre.Id,
+                Name = genre.Name
+            };
+            var addGenre = await _genreRepository.Add(newGenre);
+
+            if (addGenre.Id > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteGenre(int id)
+        {
+            var deleteGenre = await _genreRepository.Delete(new Genre { Id = id});
+               
+            if (deleteGenre.Id > 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

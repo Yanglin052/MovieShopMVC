@@ -28,6 +28,26 @@ namespace Infrastructure.Services
             _movieRepository = movieRepository;
         }
 
+        public async Task<UserModel> GetUserDetails(int id)
+        {
+            var userDetails = await _userRepository.GetById(id);
+
+            if (userDetails == null)
+            {
+                return null;
+            }
+            var user = new UserModel
+            {
+                Id = userDetails.Id,
+                FirstName = userDetails.FirstName,
+                LastName = userDetails.LastName,
+                Email = userDetails.Email,
+                DateOfBirth = (DateTime)userDetails.DateOfBirth
+            };
+
+            return user;
+        }
+
 
         public async Task<bool> AddFavorite(FavoriteRequestModel favoriteRequest)
         {

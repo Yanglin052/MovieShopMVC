@@ -28,6 +28,7 @@ builder.Services.AddScoped<IRepository<Genre>, Repository<Genre>>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 
 builder.Services.AddDbContext<MovieShopDbContext>(options =>
